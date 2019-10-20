@@ -5,7 +5,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 
 const paths = {
-  pages: ['./*.html']
+  pages: ['./*.html'],
+  images: ['./images/*']
 };
 
 /**********************************************************/
@@ -25,10 +26,8 @@ const style = () => {
 const buildStyle = () => {
   return gulp
     .src('./scss/**/*.scss')
-    .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(sourcemaps.write('.'))
-    .pipe(postcss([require('autoprefixer')(), require('cssnano')()]))
+    .pipe(postcss([require('autoprefixer')()]))
     .pipe(gulp.dest('./dist/css'));
 };
 
@@ -46,9 +45,17 @@ const watch = () => {
   gulp.watch('./**/*.html').on('change', browserSync.reload);
 };
 
+const copyHtml = () => {
+  return gulp.src(paths.pages).pipe(gulp.dest('dist'));
+};
+
+const copyImages = () => {
+  return gulp.src(paths.images).pipe(gulp.dest('dist/images'));
+};
+
 /**********************************************************/
 /* Exports                                                */
 /**********************************************************/
 
 exports.default = watch;
-exports.build = gulp.series(buildStyle);
+exports.build = gulp.series(copyHtml, copyImages, buildStyle);

@@ -44,10 +44,16 @@
 
 @include for-big-desktop-up {
   .hero {
+    max-width: 35%;
     &__header {
       font-size: 2.2rem;
       margin-bottom: 0.5em;
       line-height: 1.5;
+    }
+
+    &__body {
+      margin: 0 auto;
+      max-width: 80%;
     }
   }
 }
