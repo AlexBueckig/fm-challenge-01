@@ -9,6 +9,8 @@ My solution to the first FM challenge using SCSS and CSS-Grid.
 
 ## Usage
 `npm install` to install all dependencies
+
 `gulp` to start dev-server
+
 `gulp build` to compile all SCSS into one CSS file
 
